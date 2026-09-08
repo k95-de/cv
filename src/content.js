@@ -17,7 +17,7 @@ window.CV = {
   meta: {
     name: "Khaled Abdelhadi",
     tagline: {
-      en: "Mechanical engineer — 3 languages, 2 degrees, 1 long curiosity",
+      en: "Mechanical Engineer — 3 Languages, 2 Degrees, 1 Long Curiosity",
       de: "Maschinenbauingenieur — 3 Sprachen, 2 Abschlüsse, 1 lange Neugier"
     },
     intro: {
