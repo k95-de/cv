@@ -17,8 +17,8 @@ window.CV = {
   meta: {
     name: "Khaled Abdelhadi",
     tagline: {
-      en: "1D simulation engineer — cooling systems & thermal management",
-      de: "1D-Simulationsingenieur — Kühlsysteme & Thermomanagement"
+      en: "Mechanical engineer — 3 languages, 2 degrees, 1 long curiosity",
+      de: "Maschinenbauingenieur — 3 Sprachen, 2 Abschlüsse, 1 lange Neugier"
     },
     intro: {
       en: "A career as one flow. Ride the coolant through the pipe — every junction is a step.",
