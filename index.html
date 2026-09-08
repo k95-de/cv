@@ -167,8 +167,11 @@
     width:clamp(280px,34vw,500px); pointer-events:none; }
   /* soft dark halo behind each projection so it reads on ANY background,
      including the bright tunnel core on phones */
-  .st-viz-wrap::before{ content:""; position:absolute; inset:-14%; z-index:-1;
-    background:radial-gradient(52% 52% at 50% 50%, rgba(4,7,13,.78), transparent 74%); }
+  /* no halo on desktop: the projections carry real transparency, so any box shows */
+  .st-viz-wrap::before{ content:none; }
+  @media (max-width:720px){
+    .st-viz-wrap::before{ content:""; position:absolute; inset:-30%; z-index:-1; border-radius:50%;
+      background:radial-gradient(closest-side, rgba(4,7,13,.55), transparent); } }
   .st-viz{ width:100%; height:auto; display:block;
     filter:drop-shadow(0 0 26px rgba(59,130,246,.20)); }
 
@@ -482,10 +485,10 @@
 <script src="lib/gsap.min.js"></script>
 <script src="lib/ScrollTrigger.min.js"></script>
 <script src="lib/lenis.min.js"></script>
-<script src="src/content.js?v=9"></script>
-<script src="src/scenes.js?v=9"></script>
-<script src="src/viz.js?v=9"></script>
-<script src="src/space.js?v=9"></script>
-<script src="src/app.js?v=9"></script>
+<script src="src/content.js?v=17"></script>
+<script src="src/scenes.js?v=17"></script>
+<script src="src/viz.js?v=17"></script>
+<script src="src/space.js?v=17"></script>
+<script src="src/app.js?v=17"></script>
 </body>
 </html>
