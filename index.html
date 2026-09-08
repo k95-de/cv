@@ -73,9 +73,10 @@
 
   /* ---------------- hero ---------------- */
   #hero{ z-index:4; }
+  #hero{ --pw:clamp(170px,15.5vw,223px); --pr:clamp(1.4rem,13.9vw,200px); --pt:53%; }
   #hero .portrait{
-    position:absolute; right:clamp(1.4rem,13.9vw,200px); top:53%; transform:translateY(-50%);
-    width:clamp(170px,15.5vw,223px); aspect-ratio:1/1; border-radius:200px; overflow:hidden;
+    position:absolute; right:var(--pr); top:var(--pt); transform:translateY(-50%);
+    width:var(--pw); aspect-ratio:1/1; border-radius:200px; overflow:hidden;
     -webkit-mask-image:radial-gradient(130% 130% at 50% 35%, #000 55%, transparent);
             mask-image:radial-gradient(130% 130% at 50% 35%, #000 55%, transparent);
   }
@@ -214,8 +215,9 @@
   .station.has-video .st-viz-wrap{ display:none; }
 
   /* the route — positions list beside the portrait */
-  #route{ position:absolute; right:clamp(1.4rem,7vw,9rem); top:calc(50% + clamp(110px,14vw,190px));
-    width:clamp(200px,24vw,340px); }
+  #route{ position:absolute; right:calc(var(--pr) + var(--pw) / 2); transform:translateX(50%);
+    top:calc(var(--pt) + var(--pw) / 2 + 1.7rem);
+    width:max-content; max-width:clamp(200px,24vw,340px); }
   #route .r-title{ font-family:var(--font-display); font-size:.6rem; letter-spacing:.3em;
     text-transform:uppercase; color:var(--ink-dim); margin-bottom:.6rem; }
   #route ol{ list-style:none; display:flex; flex-direction:column; gap:.28rem; }
@@ -256,7 +258,7 @@
 
   @media (max-width:720px){
     #hero .portrait{ position:static; transform:none; margin-bottom:1.2rem; width:min(46vw,180px); }
-    #route{ position:static; width:auto; margin:.9rem 0 0; }
+    #route{ position:static; transform:none; width:auto; max-width:none; margin:.9rem 0 0; }
     #route ol{ gap:.16rem; }
     #route li{ font-size:.66rem; }
     .overlay .h-inner{ justify-content:flex-end; padding-bottom:3.5rem;
