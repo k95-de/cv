@@ -73,7 +73,7 @@
 
   /* ---------------- hero ---------------- */
   #hero{ z-index:4; }
-  #hero{ --pw:clamp(170px,15.5vw,223px); --pr:clamp(1.4rem,13.9vw,200px); --pt:53%; }
+  #hero{ --pw:clamp(170px,15.5vw,223px); --pr:clamp(1.4rem,13.9vw,200px); --pt:calc(50% - clamp(33px,3vw,39px)); }
   #hero .portrait{
     position:absolute; right:var(--pr); top:var(--pt); transform:translateY(-50%);
     width:var(--pw); aspect-ratio:1/1; border-radius:200px; overflow:hidden;
