@@ -358,9 +358,10 @@ html.is-h .st-bul{ gap:.4rem; }
 /* ---------------------------------------------------------------- contact */
 .contact{ min-height:100svh; display:flex; flex-direction:column; justify-content:center; }
 .ct-big{ font-family:var(--f-display); font-weight:900; text-transform:uppercase; line-height:.82; font-size:clamp(4.6rem,17vw,19rem); letter-spacing:-.01em; }
-.ct-big em{ display:block; text-transform:none; font-size:.86em; line-height:1; padding-right:.12em; }
+.ct-big em{ display:block; font-style:normal; text-transform:uppercase; color:var(--ink); line-height:.82; padding-right:.12em; }
 .ct-big em .w{ padding-right:.08em; }
-.ct-line{ margin-top:1.6rem; max-width:44ch; color:var(--ink-2); font-size:1.1rem; }
+.ct-line{ margin-top:clamp(1.6rem,4vh,2.4rem); align-self:flex-start; display:inline-flex; align-items:center; gap:.7rem; max-width:none; color:var(--ink); font-size:.92rem; letter-spacing:.12em; text-transform:uppercase; line-height:1.5; padding:.55rem 1rem; border:1px solid rgba(255,255,255,.14); border-radius:999px; }
+.ct-line .ok{ flex:none; width:.55rem; height:.55rem; border-radius:50%; background:#3ddc84; box-shadow:0 0 10px #3ddc84; }
 .ct-actions{ margin-top:clamp(2rem,6vh,3.6rem); display:flex; align-items:center; gap:clamp(1.6rem,5vw,4rem); flex-wrap:wrap; }
 .btn-orb{ position:relative; width:clamp(150px,15vw,190px); aspect-ratio:1; border-radius:50%; display:grid; place-items:center; text-align:center;
   border:1px solid var(--line-2); overflow:hidden; isolation:isolate; color:var(--ink); padding:1.4rem; }
@@ -371,7 +372,7 @@ html.is-h .st-bul{ gap:.4rem; }
 .btn-orb svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; margin-top:-2.2rem; }
 .ct-links{ display:grid; gap:.8rem; justify-items:start; }
 .ct-links a, .ct-links button{ font-family:var(--f-display); font-weight:700; text-transform:uppercase; font-size:clamp(1.3rem,2.4vw,2.1rem); line-height:1.1; letter-spacing:.01em; }
-.ct-mail{ text-transform:none !important; font-family:var(--f-serif) !important; font-style:italic; font-weight:400 !important; font-size:clamp(1.6rem,3vw,2.8rem) !important; }
+.ct-mail{ text-transform:none !important; }
 #copy.ok{ color:var(--t3); }
 .ct-cit{ margin-top:clamp(2rem,6vh,3rem); color:var(--ink-3); }
 
@@ -427,7 +428,7 @@ html.no-anim .h-hint, html.field-static .h-hint{ visibility:hidden; }
   .edu-row{ grid-template-columns:1fr; gap:.6rem; }
   .langs{ grid-template-columns:1fr; }
   .ct-actions{ flex-direction:column; align-items:flex-start; }
-  .ct-mail{ font-size:1.45rem !important; word-break:break-all; }
+  .ct-mail{ word-break:break-all; }
   .ft-row{ flex-direction:column; }
   .lang button{ padding:.3rem .5rem; }
 }
