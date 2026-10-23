@@ -123,7 +123,7 @@ function buildStations() {
     /* responsive sizes: 640 / 960 / 1280 px wide webp; the sheen mask is set later from
        the already-downloaded image (no second download, see the load listener) */
     const b = s.img ? s.img.replace(/\.webp$/, "") : "";
-    const media = s.img ? '<figure class="st-media"><img data-src="' + b + '-960.webp" data-srcset="' + b + "-640.webp 640w, " + b + "-960.webp 960w, " + b + '-1280.webp 1280w" sizes="(min-width: 1000px) min(44vw, 80vh), min(520px, calc(100vw - 76px))" alt="" loading="lazy" decoding="async" width="1280" height="859" /><span class="sheen"></span></figure>' : "";
+    const media = s.img ? '<figure class="st-media"><img data-src="' + b + '-960.webp" data-srcset="' + b + "-640.webp 640w, " + b + "-960.webp 960w, " + b + '-1280.webp 1280w" sizes="(min-width: 1000px) min(44vw, 80vh), min(520px, calc(100vw - 76px))" alt="" loading="eager" decoding="async" width="1280" height="859" /><span class="sheen"></span></figure>' : "";
     return '<li class="st ' + kind + '" data-i="' + i + '" data-year="' + esc(s.years.slice(0, 4)) + '" style="--c:' + c + '">' +
       '<div class="st-text">' + gate +
         '<p class="st-years" aria-label="' + esc(s.years) + '">' + esc(s.years) + "</p>" +
@@ -158,6 +158,13 @@ function lazyImages() {
     if (e.isIntersecting) { loadImg(e.target); lazyIO.unobserve(e.target); }
   }), { rootMargin: "100% 100% 100% 100%" });
   ims.forEach(im => lazyIO.observe(im));
+  /* warm-up: once the page is idle, fetch every station image in the background,
+     so the sideways career scroll never waits for a picture */
+  const sd = navigator.connection && navigator.connection.saveData;
+  if (!sd) {
+    const warm = () => $$("#stations img[data-srcset]").forEach((im, i) => setTimeout(() => loadImg(im), i * 120));
+    if ("requestIdleCallback" in window) requestIdleCallback(warm, { timeout: 2500 }); else setTimeout(warm, 1800);
+  }
 }
 
 function buildKit() {
@@ -694,8 +701,8 @@ document.addEventListener("pointermove", e => {
 let ctx = null, isH = false, circuitTween = null, revealOK = true;
 const hudSec = $("#hud-sec"), thFill = $("#th-fill"), thVal = $("#th-val");
 let contactGlow = 0, heroOut = 0, coolDown = 0, scrollProg = 0, curSection = "Source";
-/* what the thermometer (and the cursor label) shows: scroll heats, the footer cools */
-const shownProg = () => Math.max(0, scrollProg - coolDown * scrollProg * 0.999);
+/* what the thermometer (and the cursor label) shows: hot (95 °C) at the top, cooling to 20 °C at the bottom */
+const shownProg = () => Math.max(0, Math.min(1, 1 - scrollProg));
 function paintThermo() {
   const p = shownProg();
   thFill.style.transform = "scaleY(" + p.toFixed(4) + ")";
