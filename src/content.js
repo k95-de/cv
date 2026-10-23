@@ -195,10 +195,10 @@ window.CV = {
       bullets: {
         en: ["Owned the interconnected cooling system end to end — battery, HV components, cabin, refrigerant.",
              "Documented the simulation methodology now used across the team; mentored new engineers.",
-             "Covered hydrogen fuel-cell cooling next to battery-electric and diesel; added pipe insulation to coolant-line models and assessed immersion cooling for a customer-specific project."],
+             "Added pipe insulation to coolant-line models and assessed immersion cooling for a customer-specific project."],
         de: ["Das vernetzte Kühlsystem ganzheitlich verantwortet — Batterie, HV-Komponenten, Kabine, Kältemittel.",
              "Die heute teamweit genutzte Simulationsmethodik dokumentiert; neue Ingenieure eingearbeitet.",
-             "Kühlung von Wasserstoff-Brennstoffzellen neben E- und Diesel-Plattformen abgedeckt; Rohrisolierung in die Kühlleitungsmodelle eingebaut und Tauchkühlung (Immersion Cooling) für ein Kundenprojekt bewertet."]
+             "Rohrisolierung in die Kühlleitungsmodelle eingebaut und Tauchkühlung (Immersion Cooling) für ein Kundenprojekt bewertet."]
       }
     },
     {

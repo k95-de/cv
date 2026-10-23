@@ -4,3 +4,5 @@ assets/jobs/*.jpg
 assets/jobs/*.mp4
 assets/jobs/training.webp
 assets/portrait.png
+
+.claude/
