@@ -205,13 +205,15 @@ window.CV = {
       { h: { en: "Data & process", de: "Daten & Prozess" },
         items: ["Python", "MATLAB / Simulink", "JIRA", "Agile / Scrum", "ASPICE V-cycle"] }
     ],
-    certsTitle: { en: "Recent certificates", de: "Aktuelle Zertifikate" },
+    certsTitle: { en: "Certificates", de: "Zertifikate" },
     certs: [
+      { t: "Applied Computational Fluid Dynamics · Simcenter STAR-CCM+", by: "Siemens · Coursera", y: "2026" },
+      { t: "Computational Fluid Mechanics project · airflow around a spoiler", by: "Coursera", y: "2026" },
       { t: "Design of Industrial Piping Systems", by: "L&T EduTech · Coursera", y: "2026" },
-      { t: "Applied Computational Fluid Dynamics", by: "Siemens · Coursera", y: "2026" },
       { t: "AI for Design and Optimization", by: "University of Michigan · Coursera", y: "2026" },
       { t: "Python for Data Science, AI & Development", by: "IBM · Coursera", y: "2026" },
-      { t: "Claude Code 101", by: "Anthropic Academy", y: "2026" },
+      { t: "BIM Fundamentals for Engineers", by: "L&T EduTech · Coursera", y: "2026" },
+      { t: "Claude 101 · Claude Code 101 · Claude Code in Action", by: "Anthropic Academy", y: "2026" },
       { t: "SimOps Fundamentals", by: "Simulation process automation", y: "2025" }
     ]
   },
