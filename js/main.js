@@ -180,7 +180,9 @@ function buildEdu() {
 function buildRec() {
   const R = CV.rec, C = CV.contact;
   const jobs = CV.stations.filter(s => s.kind === "job").slice().reverse();
-  const main = jobs.slice(0, 5), earlier = jobs.slice(5);
+  /* show design roles next to the simulation roles, not only MAN/TRATON */
+  const keep = ["network", "bus", "flux", "stress", "mold", "aero"];
+  const main = jobs.filter(s => keep.some(k => (s.img || "").includes(k))), earlier = jobs.filter(s => !main.includes(s));
   const ic = {
     dl: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" /></svg>',
     mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 6 9-6" /></svg>',
@@ -198,7 +200,7 @@ function buildRec() {
   const earl = earlier.map(s => "<span>" + esc(pick(s.org)) + " <em>" + esc(s.years) + "</em></span>").join("");
   const edu = CV.edu.items.map((e, i) =>
     '<li class="rs-anim"><p class="rs-deg"><b>' + esc(e.deg) + '</b> <span class="mono">' + esc(e.y) + "</span></p><p class=\"rs-en\">" + esc(pick(e.name)) +
-    '</p><p class="rs-ew">' + esc(pick(e.where)).replace(/ \(.*\)$/, "") + (i === 0 ? ' · <strong>' + esc(pick(R.thesis)) + "</strong>" : "") + "</p></li>").join("");
+    '</p><p class="rs-ew">' + esc(pick(e.where)).replace(/ \(.*\)$/, "") + "" + "</p></li>").join("");
   const langs = CV.edu.langs.map(l => '<li><b>' + esc(pick(l.l)) + "</b><span>" + esc(pick(l.v)) + '</span><i style="--p:' + l.p + '"></i></li>').join("");
   const tools = R.tools.map(x => "<li>" + esc(x) + "</li>").join("");
 
