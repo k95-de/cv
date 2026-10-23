@@ -346,9 +346,11 @@ const probe = {
     const budget = 1000 / TIERS[tier].fps;
     const tooSlow = avg > budget * 1.35;
     this.reset();
-    if (this.slow !== -1) {                       /* first probe decides at once */
+    if (this.slow !== -1) {                       /* first probe decides once */
       this.slow = -1;
-      if (tooSlow) stepDown();
+      /* changing quality rebuilds the field (a visible reset), so only give up on the
+         live field when the device is really struggling (< ~15 fps); otherwise keep it */
+      if (avg > budget * 4) { goStatic(); applyFx(); }
       return;
     }
     /* no mid-scroll downgrades: re-creating the field wiped it (looked like a reset). Quality is decided once at the start. */
