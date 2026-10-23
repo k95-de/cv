@@ -396,6 +396,7 @@ let soundWanted = false;
 try { soundWanted = localStorage.getItem("flow-sound") === "on"; } catch (e) {}
 function soundLabel() {
   const b = $("#sound");
+  if (!b) return;
   b.setAttribute("aria-pressed", String(soundOn));
   const lab = t(soundOn ? "soundOn" : "soundOff");
   b.title = lab + " (M)";
@@ -412,8 +413,7 @@ function setSound(on, quiet) {
 }
 function blip(f) { if (sfx && soundOn) sfx.blip(f); }
 function tick(bright) { if (sfx && soundOn) sfx.tick(bright); }
-$("#sound").addEventListener("click", () => setSound(!soundOn));
-if (!sfx) $("#sound").hidden = true;
+if ($("#sound")) { $("#sound").addEventListener("click", () => setSound(!soundOn)); if (!sfx) $("#sound").hidden = true; }
 /* remembered "on": audio may only start after a user gesture, so arm it for the first one
    (reduced-motion visitors always start in silence) */
 if (sfx && soundWanted && !reduced) {
