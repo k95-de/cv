@@ -1,5 +1,5 @@
 /* ============================================================================
-   THE FLOW · November edition · all words on the page (EN + DE)
+   THE VORTEX · all words on the page (EN + DE)
    Khaled: edit text here, save, reload. Every fact comes from the live site
    (k95-de.github.io/cv) or APPLY/bot/profile.md. Keep it that way.
    ========================================================================== */
@@ -20,7 +20,7 @@ window.CV = {
     copied:    { en: "Copied", de: "Kopiert" },
     soundOn:   { en: "Sound on", de: "Ton an" },
     soundOff:  { en: "Sound off", de: "Ton aus" },
-    classic:   { en: "Ride the 3D pipe (classic version)", de: "Durch das 3D-Rohr fahren (klassische Version)" },
+    classic:   { en: "The Flow · the original 3D pipe", de: "The Flow · das originale 3D-Rohr" },
     backTop:   { en: "Back to the source", de: "Zurück zum Anfang" },
     heatHint:  { en: "Move to add heat", de: "Bewegen = Wärme" },
     tapHint:   { en: "Drag to add heat", de: "Ziehen = Wärme" },
