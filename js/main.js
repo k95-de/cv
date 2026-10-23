@@ -351,7 +351,8 @@ const probe = {
       if (tooSlow) stepDown();
       return;
     }
-    if (tooSlow) { if (++this.watch >= 2) { this.watch = 0; stepDown(); } } else this.watch = 0;
+    /* no mid-scroll downgrades: re-creating the field wiped it (looked like a reset). Quality is decided once at the start. */
+    this.watch = 0;
   },
   watch: 0
 };

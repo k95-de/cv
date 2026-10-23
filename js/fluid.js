@@ -277,6 +277,11 @@ function HeatField(canvas, opts) {
     const dpr = Math.min(window.devicePixelRatio || 1, cfg.DPR);
     const w = Math.max(2, Math.floor(canvas.clientWidth * dpr)), h = Math.max(2, Math.floor(canvas.clientHeight * dpr));
     if (canvas.width === w && canvas.height === h && vel) return;
+    /* small size changes (phone address bar, scrollbars, layout refresh) keep the
+       running field: only the drawing buffer changes, the simulation continues */
+    if (vel && Math.abs(w - canvas.width) / canvas.width < 0.25 && Math.abs(h - canvas.height) / canvas.height < 0.25) {
+      canvas.width = w; canvas.height = h; return;
+    }
     canvas.width = w; canvas.height = h;
     free();
     const s = res(cfg.SIM), d = res(cfg.DYE);
@@ -373,12 +378,10 @@ function HeatField(canvas, opts) {
     blit(null);
   }
 
-  /* ambient heat sources: two slow "hot plates" low in the frame, so the
+  /* ambient heat source: ONE slow "hot plate" low in the frame, so the
      field breathes even when nobody touches it (and on phones) */
   const emitters = [
-    { x: 0.22, ph: 0.0, sp: 0.13 },
-    { x: 0.70, ph: 2.1, sp: 0.09 },
-    { x: 0.48, ph: 4.0, sp: 0.11 }
+    { x: 0.5, ph: 0.0, sp: 0.1 }
   ];
   let emitClock = 0;
   this.ambient = 1;
