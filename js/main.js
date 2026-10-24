@@ -297,6 +297,7 @@ function pickTier() {
   const mem = navigator.deviceMemory || 8, cores = navigator.hardwareConcurrency || 8;
   const saveData = !!(navigator.connection && navigator.connection.saveData);
   let t = isMobile() || !finePointer ? 2 : 3;
+  if (t === 3 && (mem < 8 || cores < 8)) t = 2;   /* "high" only on strong machines */
   if (mem <= 4 || cores <= 4) t = Math.min(t, 2);
   if (mem <= 2 || cores <= 2 || saveData) t = 1;
   if (mem < 1) t = 0;
@@ -330,6 +331,7 @@ if ("IntersectionObserver" in window) {
 document.addEventListener("visibilitychange", () => { probe.reset(); });
 
 /* frame-time probe + watchdog */
+let loaderUp = true;
 const probe = {
   on: false, sum: 0, n: 0, start: 0, slow: 0,
   reset() { this.sum = 0; this.n = 0; this.start = 0; },
@@ -339,25 +341,19 @@ const probe = {
     if (!this.start) { this.start = now; return; }
     if (dtMs > 500) return;                       /* tab switch, background throttling, debugger: not the field's fault */
     this.sum += dtMs; this.n++;
-    const win = this.slow === -1 ? 2000 : 1000;   /* first probe 1 s, then 2 s watchdog windows */
-    if (now - this.start < win) return;
+    if (now - this.start < 600) return;           /* short windows: the decision happens while the loader still covers the field */
     if (this.n < 3) { this.reset(); return; }     /* too few frames to judge */
     const avg = this.sum / this.n;
     const budget = 1000 / TIERS[tier].fps;
-    const tooSlow = avg > budget * 1.35;
     this.reset();
-    if (this.slow !== -1) {                       /* first probe decides once */
-      this.slow = -1;
-      /* changing quality rebuilds the field (a visible reset), so only give up on the
-         live field when the device is really struggling (< ~15 fps); otherwise keep it */
-      if (avg > budget * 4) { goStatic(); applyFx(); }
-      return;
-    }
-    /* no mid-scroll downgrades: re-creating the field wiped it (looked like a reset). Quality is decided once at the start. */
-    this.watch = 0;
+    /* quality may only change while the loader hides the field (a rebuild there is invisible).
+       Once the page is revealed it is frozen: no resets while someone is looking. */
+    if (!loaderUp) { this.on = false; return; }
+    if (avg > budget * 1.35) stepDown();
   },
   watch: 0
 };
+if (field) probe.begin();   /* judge the device while the loader is still up */
 function stepDown() {
   if (!field) return;
   if (tier <= 1) { goStatic(); applyFx(); return; }
@@ -1111,7 +1107,8 @@ function finishLoad() {
       .add(revealHero, 1.05);
   }
   setupMotion();
-  if (field) setTimeout(() => probe.begin(), reduced ? 0 : 1200);
+  /* the probe ran during the loader; freeze quality shortly after the reveal */
+  setTimeout(() => { loaderUp = false; }, reduced ? 0 : 900);
   if (lenis && !REC) lenis.start();
   if (hasGsap) ScrollTrigger.refresh();
   if (!REC && location.hash && $(location.hash)) setTimeout(() => scrollToTarget(location.hash, true), 100);
